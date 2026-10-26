@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio website showcasing my skills, projects, and experience.">
+  <title>Alex Morgan | Portfolio</title>
+
+  <style>
+    /* ===== GENERAL STYLES ===== */
+    :root {
+      --bg: #0b0d12;
+      --surface: #131720;
+      --text: #f5f7fb;
+      --muted: #a0a8b8;
+      --accent: #8b7bff;
+      --border: #262c39;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* ===== NAVIGATION ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 13, 18, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      color: white;
+      border: 0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 80% 30%,
+        rgba(139, 123, 255, 0.13), transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 760px;
+      padding: 70px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      background: rgba(139, 123, 255, 0.1);
+      border: 1px solid rgba(139, 123, 255, 0.3);
+      padding: 7px 14px;
+      border-radius: 50px;
+      margin-bottom: 25px;
+      font-size: 0.9rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.08;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .about-card {
+      min-height: 290px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1c2030, #11141c);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 35px;
+    }
+
+    .about-icon {
+      font-size: 5rem;
+      margin-bottom: 10px;
+    }
+
+    .about-card h3 {
+      font-size: 1.5rem;
+    }
+
+    .about-card p {
+      color: var(--muted);
+    }
+
+    /* ===== SKILLS ===== */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 8px;
+      color: #dce0ed;
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+
+    .project-visual {
+      min-height: 175px;
+      display: grid;
+      place-items: center;
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, #24203f, #171b29);
+    }
+
+    .project-info {
+      padding: 24px;
+    }
+
+    .project-info h3 {
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .project-info p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .project-link {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-box {
+      padding: 55px 25px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(135deg, #171a29, #10131a);
+    }
+
+    .contact-box p {
+      max-width: 560px;
+      margin: 15px auto 28px;
+      color: var(--muted);
+    }
+
+    .email-link {
+      color: var(--accent);
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 800px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 22px 5%;
+        background: #10131a;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hero {
+        min-height: 75vh;
+      }
+
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav class="container">
+      <a class="logo" href="#home">Alex<span class="accent">.</span></a>
+
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow">👋 Welcome to my portfolio</span>
+
+          <h1>
+            Hi, I'm Alex Morgan.<br>
+            I build <span class="accent">digital</span> experiences.
+          </h1>
+
+          <p>
+            I'm a creative web developer passionate about building
+            beautiful, responsive, and user-friendly websites that
+            turn ideas into reality.
+          </p>
+
+          <div class="buttons">
+            <a href="#projects" class="btn btn-primary">
+              Explore My Work →
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              Get In Touch
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2 class="section-title">
+              About <span class="accent">Me</span>
+            </h2>
+
+            <p>
+              I'm a web developer who enjoys combining creative design
+              with clean, efficient code. I love learning new
+              technologies and solving real-world problems.
+            </p>
+
+            <p>
+              My goal is to create meaningful digital experiences
+              that look great, work smoothly, and make life easier
+              for the people who use them.
+            </p>
+
+            <a href="#contact" class="btn btn-primary">
+              Let's Work Together
+            </a>
+          </div>
+
+          <div class="about-card">
+            <div>
+              <div class="about-icon">💻</div>
+              <h3>Creative Developer</h3>
+              <p>Design-minded. Detail-focused. Always learning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section-title">
+          My <span class="accent">Skills</span>
+        </h2>
+        <p class="section-subtitle">
+          Technologies and tools I enjoy working with.
+        </p>
+
+        <div class="skills">
+          <span class="skill">HTML5</span>
+          <span class="skill">CSS3</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">Responsive Design</span>
+          <span class="skill">UI/UX Design</span>
+          <span class="skill">Git & GitHub</span>
+          <span class="skill">React</span>
+          <span class="skill">Web Accessibility</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">
+          Featured <span class="accent">Projects</span>
+        </h2>
+        <p class="section-subtitle">
+          A few examples of the things I like to create.
+          Replace these demo projects with your own work.
+        </p>
+
+        <div class="projects-grid">
+
+          <article class="project-card">
+            <div class="project-visual">🛍️</div>
+            <div class="project-info">
+              <h3>E-Commerce Website</h3>
+              <p>
+                A clean online storefront concept with product
+                cards and a responsive layout.
+              </p>
+              <a class="project-link"
+                 href="https://github.com/"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                View Project ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual">📊</div>
+            <div class="project-info">
+              <h3>Analytics Dashboard</h3>
+              <p>
+                A dashboard concept designed to make data easier
+                to explore and understand.
+              </p>
+              <a class="project-link"
+                 href="https://github.com/"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                View Project ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual">🌐</div>
+            <div class="project-info">
+              <h3>Business Landing Page</h3>
+              <p>
+                A modern landing page concept focused on clear
+                messaging and user engagement.
+              </p>
+              <a class="project-link"
+                 href="https://github.com/"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                View Project ↗
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2 class="section-title">
+            Let's Build Something <span class="accent">Great</span>
+          </h2>
+
+          <p>
+            Have a project in mind, a job opportunity, or just want
+            to say hello? I'd love to hear from you.
+          </p>
+
+          <!-- Replace with your own email address -->
+          <a class="btn btn-primary"
+             href="mailto:your.email@example.com">
+            Send Me an Email ✉
+          </a>
+
+          <p>
+            Or email me directly:
+            <a class="email-link"
+               href="mailto:your.email@example.com">
+              your.email@example.com
+            </a>
+          </p>
+
+          <p>
+            <a class="email-link"
+               href="https://www.linkedin.com/"
+               target="_blank"
+               rel="noopener noreferrer">LinkedIn</a>
+            &nbsp; · &nbsp;
+            <a class="email-link"
+               href="https://github.com/"
+               target="_blank"
+               rel="noopener noreferrer">GitHub</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Alex Morgan. All rights reserved.</p>
+      <p>Designed with <span class="accent">♥</span> and code.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.textContent = isOpen ? "✕" : "☰";
+    });
+
+    // Close menu after selecting a section
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    // Automatically update the copyright year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
